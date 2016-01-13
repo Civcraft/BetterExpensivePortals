@@ -1,8 +1,10 @@
 package vg.civcraft.mc.bettershards.command.commands;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
@@ -27,16 +29,20 @@ public class GetShard extends PlayerCommand {
 				sender.sendMessage(ChatColor.RED + "Non-players need to specify a player to look up");
 				return true;
 			}
-			Player player = (Player) sender;
-			PlayerDetails details = MercuryAPI.getServerforAccount(player.getUniqueId());
-			player.sendMessage(ChatColor.GREEN + "[BetterShards]You are currently in the shard '" + details.getServerName() + "'");
+			sender.sendMessage(ChatColor.GREEN + "You are currently in the shard '" + MercuryAPI.serverName() + "'");
 			return true;
 		} else {
-			if(!sender.isOp()) {
+			if(!(sender.isOp() || (sender instanceof ConsoleCommandSender))) {
 				sender.sendMessage(ChatColor.RED + "You cannot look up the shard of another player!");
 				return true;
 			}
-			PlayerDetails details = MercuryAPI.getServerforPlayer(args[0]);
+			PlayerDetails details;
+			UUID player = UUID.fromString(args[0]);
+			if(player != null) {
+				details = MercuryAPI.getServerforAccount(player);
+			} else {
+				details = MercuryAPI.getServerforPlayer(args[0]);
+			}
 			if(details == null) {
 				sender.sendMessage(ChatColor.RED + "Player not found!");
 				return true;
