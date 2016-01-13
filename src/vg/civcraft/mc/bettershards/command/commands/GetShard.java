@@ -29,7 +29,7 @@ public class GetShard extends PlayerCommand {
 			}
 			Player player = (Player) sender;
 			PlayerDetails details = MercuryAPI.getServerforAccount(player.getUniqueId());
-			player.sendMessage(ChatColor.GREEN + "You are currently in the shard '" + details.getServerName() + "'");
+			player.sendMessage(ChatColor.GREEN + "[BetterShards]You are currently in the shard '" + details.getServerName() + "'");
 			return true;
 		} else {
 			if(!sender.isOp()) {
