@@ -17,8 +17,8 @@ public class GetShard extends PlayerCommand {
 	public GetShard(String name) {
 		super(name);
 		setIdentifier("shard");
-		setDescription("Gets the name of the shard you're in");
-		setUsage("/shard <name>");
+		setDescription("Gets the name of the shard you're in.");
+		setUsage("/shard <player>");
 		setArguments(0, 1);
 	}
 	
@@ -26,10 +26,10 @@ public class GetShard extends PlayerCommand {
 	public boolean execute(CommandSender sender, String[] args) {
 		if(args.length == 0) {
 			if(!(sender instanceof Player)) {
-				sender.sendMessage(ChatColor.RED + "Non-players need to specify a player to look up");
+				sender.sendMessage(ChatColor.RED + "Non-players need to specify a player to look up.");
 				return true;
 			}
-			sender.sendMessage(ChatColor.GREEN + "You are currently in the shard '" + MercuryAPI.serverName() + "'");
+			sender.sendMessage(ChatColor.GREEN + "[BetterShards] You are currently in the shard '" + MercuryAPI.serverName() + "'.");
 			return true;
 		} else {
 			if(!(sender.isOp() || (sender instanceof ConsoleCommandSender))) {
@@ -37,7 +37,10 @@ public class GetShard extends PlayerCommand {
 				return true;
 			}
 			PlayerDetails details;
-			UUID player = UUID.fromString(args[0]);
+			UUID player = null;
+			try {
+				player = UUID.fromString(args[0]);
+			} catch (IllegalArgumentException iaex) {}
 			if(player != null) {
 				details = MercuryAPI.getServerforAccount(player);
 			} else {
@@ -47,7 +50,7 @@ public class GetShard extends PlayerCommand {
 				sender.sendMessage(ChatColor.RED + "Player not found!");
 				return true;
 			} else {
-				sender.sendMessage(ChatColor.GREEN + args[0] + " is on the shard '" + details.getServerName() + "'");
+				sender.sendMessage(ChatColor.GREEN + args[0] + " is on the shard '" + details.getServerName() + "'.");
 				return true;
 			}
 		}
