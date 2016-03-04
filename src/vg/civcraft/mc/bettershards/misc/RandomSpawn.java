@@ -33,10 +33,11 @@ public class RandomSpawn {
 	 * that the player is randomspawned on that server
 	 * 
 	 * @param p Player who just died
+	 * @param sameServer if they should spawn on the same server
 	 */
-	public void handleDeath(Player p) {
+	public void handleDeath(Player p, boolean sameServer) {
 		List<String> servers = getAllowedServers();
-		if (servers.size() == 0) {
+		if (servers.size() == 0 || sameServer) {
 			 p.teleport(getLocation());
 			 return;
 		}
