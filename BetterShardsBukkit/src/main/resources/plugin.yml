@@ -3,7 +3,7 @@ main: vg.civcraft.mc.bettershards.BetterShardsPlugin
 version: ${releaseVersion}
 author: Rourke750
 depend: [Mercury, CivModCore]
-softdepend: [NameLayer, CombatTagPlus]
+softdepend: [NameLayer, CombatTagPlus, ProtocolLib]
 commands:
  bsc:
   permission: bettershards.*
