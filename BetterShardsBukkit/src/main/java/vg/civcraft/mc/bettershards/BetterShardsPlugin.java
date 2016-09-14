@@ -8,6 +8,7 @@ import vg.civcraft.mc.bettershards.external.CombatTagManager;
 import vg.civcraft.mc.bettershards.external.MercuryManager;
 import vg.civcraft.mc.bettershards.listeners.BetterShardsListener;
 import vg.civcraft.mc.bettershards.listeners.MercuryListener;
+import vg.civcraft.mc.bettershards.listeners.PlayerInfoListener;
 import vg.civcraft.mc.bettershards.manager.BedManager;
 import vg.civcraft.mc.bettershards.manager.ConnectionManager;
 import vg.civcraft.mc.bettershards.manager.PortalsManager;
@@ -83,6 +84,9 @@ public class BetterShardsPlugin extends ACivMod{
 		getServer().getPluginManager().registerEvents(l, this);
 		getServer().getPluginManager().registerEvents(new MercuryListener(), this);
 		// CombatTag listener is registered in CombatTagManager depending on whether CombatTagPlus is installed
+		if(getServer().getPluginManager().isPluginEnabled("ProtocolLib")) {
+			getServer().getPluginManager().registerEvents(new PlayerInfoListener(this), this);
+		}
 	}
 	
 	public static String getCurrentServerName(){

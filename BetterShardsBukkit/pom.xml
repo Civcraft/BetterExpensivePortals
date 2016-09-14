@@ -81,6 +81,11 @@
 			<version>1.2.4-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+            <groupId>com.comphenix.protocol</groupId>
+            <artifactId>ProtocolLib</artifactId>
+            <version>4.0.2-SNAPSHOT</version>
+        </dependency>
 	</dependencies>
 
 	<repositories>
@@ -92,5 +97,9 @@
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
 		</repository>
+		<repository>
+            <id>protocollib</id>
+            <url>http://repo.dmulloy2.net/content/groups/public/</url>
+        </repository>
 	</repositories>
 </project>
