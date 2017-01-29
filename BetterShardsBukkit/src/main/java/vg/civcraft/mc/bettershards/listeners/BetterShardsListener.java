@@ -296,6 +296,7 @@ public class BetterShardsListener implements Listener{
 				}
 				
 			});
+			event.setRespawnLocation(p.getLocation());
 			return;
 		}
 		final TeleportInfo teleportInfo = bed.getTeleportInfo();
@@ -303,6 +304,8 @@ public class BetterShardsListener implements Listener{
 			event.setRespawnLocation(new Location(Bukkit.getWorld(teleportInfo.getWorld()), teleportInfo.getX(), teleportInfo.getY(), teleportInfo.getZ()));
 			return;
 		}
+		//respawn player where he currently is for one tick
+		event.setRespawnLocation(p.getLocation());
 		//bed is on a different server, so we send the player there and send the according mercury message
 		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 
@@ -450,7 +453,7 @@ public class BetterShardsListener implements Listener{
 		}
 	}
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void inventoryClick(InventoryClickEvent event) {
 		Player p = (Player) event.getWhoClicked();
 		if (BetterShardsPlugin.getTransitManager().isPlayerInTransit(p.getUniqueId())) {
